@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+
+body {
+  font-family:  poppins, sans-serif;
+}
+
+h1, h2 {
+  font-family: roboto, sans-serif;
+}
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(-35deg,
+      black,
+      rgb(2, 46, 11),
+      rgb(0, 0, 0),
+      rgb(2, 46, 11),
+      rgb(0, 0, 0)
+      );
+  }
+}
