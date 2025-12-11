@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { ToastContainer, toast } from 'react-toastify'; // 1. Import Toast
+import 'react-toastify/dist/ReactToastify.css'; // 2. Import CSS
 import { 
   FaPaperPlane, 
   FaFacebookF, 
@@ -20,7 +22,6 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,39 +31,51 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // 1. Prepare data for Netlify
     const myForm = e.target;
     const formDataObj = new FormData(myForm);
 
-    // 2. Send data directly to Netlify (No email app opens)
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formDataObj).toString(),
     })
       .then(() => {
-        setHasSubmitted(true);
+        // 3. Show Success Toast
+        toast.success("Message Sent Successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+        });
+        
         setIsSubmitting(false);
-        setFormData({ name: "", email: "", service: "", message: "" }); // Clear form
-        // Optional: Alert or just rely on the UI change
-        // alert("Thank you! Message sent.");
+        setFormData({ name: "", email: "", service: "", message: "" }); 
       })
       .catch((error) => {
         console.error(error);
         setIsSubmitting(false);
-        alert("Something went wrong. Please try again.");
+        // 4. Show Error Toast
+        toast.error("Failed to send message. Please try again.", {
+            theme: "dark",
+        });
       });
   };
 
   return (
     <section id="contact" className="w-full min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center py-20">
       
+      {/* 5. Add the Toast Container Here */}
+      <ToastContainer />
+
       <ParticlesBackground />
 
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* === LEFT SIDE: FLOATING VISUAL === */}
+          {/* === LEFT SIDE === */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -111,7 +124,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* === RIGHT SIDE: THE FORM === */}
+          {/* === RIGHT SIDE === */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -126,24 +139,6 @@ const Contact = () => {
                <p className="text-sm text-gray-400">Fill out the form below and I'll get back to you shortly.</p>
              </div>
 
-            {hasSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-10"
-              >
-                <div className="text-green-500 text-5xl mb-4 flex justify-center"><FaPaperPlane /></div>
-                <h3 className="text-2xl font-bold text-white">Message Sent!</h3>
-                <p className="text-gray-400 mt-2">Thank you for reaching out. I'll get back to you soon.</p>
-                <button 
-                  onClick={() => setHasSubmitted(false)}
-                  className="mt-6 px-6 py-2 bg-neutral-800 rounded-full text-sm text-gray-300 hover:bg-neutral-700 transition"
-                >
-                  Send another message
-                </button>
-              </motion.div>
-            ) : (
-              // 3. IMPORTANT: Add 'name', 'method', and 'data-netlify'
              <form 
                 name="contact" 
                 method="POST" 
@@ -151,7 +146,6 @@ const Contact = () => {
                 onSubmit={handleSubmit} 
                 className="space-y-5"
              >
-                {/* 4. Required Hidden Input for Netlify */}
                 <input type="hidden" name="form-name" value="contact" />
 
                 <div className="space-y-2">
@@ -219,7 +213,6 @@ const Contact = () => {
                   {isSubmitting ? "Sending..." : "Send Message"} <FaPaperPlane />
                 </motion.button>
              </form>
-            )}
           </motion.div>
 
         </div>
