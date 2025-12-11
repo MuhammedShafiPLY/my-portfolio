@@ -143,6 +143,7 @@ const Contact = () => {
                 name="contact" 
                 method="POST" 
                 data-netlify="true" 
+                netlify
                 onSubmit={handleSubmit} 
                 className="space-y-5"
              >
