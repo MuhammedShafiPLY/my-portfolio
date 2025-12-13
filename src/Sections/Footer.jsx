@@ -20,9 +20,9 @@ const Footer = () => {
         
         {/* Right: Social Links (Clean & Small) */}
         <div className="flex gap-4">
-          <SocialLink href="#" icon={<FaGithub />} />
-          <SocialLink href="#" icon={<FaLinkedin />} />
-          <SocialLink href="#" icon={<FaInstagram />} />
+          <SocialLink href="https://github.com/MuhammedShafiPLY" icon={<FaGithub />} />
+          <SocialLink href="https://www.instagram.com/sh_._a_fi7?igsh=Y2l0bGIyN2YxZTh2" icon={<FaLinkedin />} />
+          <SocialLink href="https://www.linkedin.com/in/muhammedshafipp?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" icon={<FaInstagram />} />
         </div>
 
         {/* Center: Developer Credit with "Love" */}

@@ -15,6 +15,7 @@ import IntroAnimation from "./Components/IntroAnimation";
 import { Routes, Route } from "react-router-dom";
 import AllProjects from "./Pages/AllProjects";
 import Services from "./Sections/Services";
+import WhatsAppBtn from "./Components/WhatsAppBtn";
 
 const App = () => {
   const [introDone, setIntroDone] = React.useState(false);
@@ -48,6 +49,8 @@ const App = () => {
           <Route path="/all-projects" element={<AllProjects />} />
         </Routes>
       )}
+
+      <WhatsAppBtn />
     </div>
   );
 };

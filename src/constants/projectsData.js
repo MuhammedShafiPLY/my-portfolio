@@ -8,7 +8,7 @@ export const projectsData = [
     description:
       "Exporter and wholesaler of furniture and industrial engineering materials.",
     category: "Industrial / Furniture",
-    image: images.project1,
+    image: images.kpsales,
     link: "https://kpsalescorporation.com/",
   },
 
@@ -18,7 +18,7 @@ export const projectsData = [
     description:
       "Wholesaler and dealer of steel doors and construction materials.",
     category: "Construction / Retail",
-    image: images.project2,
+    image: images.mehab,
     link: "https://mehab.online/",
   },
 
@@ -27,7 +27,7 @@ export const projectsData = [
     title: "GSI (Genius Spark)",
     description: "Educational consultancy and career training institution.",
     category: "Education / Consultancy",
-    image: images.project3,
+    image: images.gsi,
     link: "https://geniussparkinternational.com/",
   },
   {
@@ -36,7 +36,7 @@ export const projectsData = [
     description:
       "Design institute offering education and training in design fields.",
     category: "Education / Design",
-    image: images.project4,
+    image: images.afdesing,
     link: "https://afdesigninstitute.com/",
   },
   {
@@ -45,7 +45,7 @@ export const projectsData = [
     description:
       "Provider of engineering and IT solutions (likely web/media services).",
     category: "IT Solutions / Engineering",
-    image: images.project5,
+    image: images.castle,
     link: "https://castlesolutions.in/",
   },
   {
@@ -53,7 +53,7 @@ export const projectsData = [
     title: "FlyBeyond Holidays",
     description: "Travel agency and tour operator offering holiday packages.",
     category: "Travel & Tourism",
-    image: images.project6,
+    image: images.flybeyond,
     link: "https://flybeyondholidays.com/",
   },
   {
@@ -62,7 +62,7 @@ export const projectsData = [
     description:
       "A Functional E-Commerce Website With Product WhatsApp Integration Retailer dealing in jewelry and metal powders.",
     category: "E-Commerce Jewelry",
-    image: images.project7,
+    image: images.ponnus,
     link: "https://ponnusgold.com/",
   },
   {
@@ -71,7 +71,7 @@ export const projectsData = [
     description:
       "Manufacturer and provider of interior and exterior furniture solutions.",
     category: "Interior Design",
-    image: images.project8,
+    image: images.voxar,
     link: "https://voxarinterior.com/",
   },
   {
@@ -80,7 +80,7 @@ export const projectsData = [
     description:
       "Professional services company involved in scientific/technical activities.",
     category: "IT / Consultancy",
-    image: images.project9,
+    image: images.briphonix,
     link: "https://briphoenix.com/",
   },
   {
@@ -89,7 +89,7 @@ export const projectsData = [
     description:
       "Creative agency likely specializing in graphics and media services.",
     category: "Creative / Media",
-    image: images.project10,
+    image: images.girafics,
     link: "https://girafics.ae/",
   },
 
@@ -99,7 +99,7 @@ export const projectsData = [
     description:
       "Business website (likely related to textiles or digital content services).",
     category: "Business / Services",
-    image: images.project1,
+    image: images.textora,
     link: "https://textora.in/",
   },
   {
@@ -108,7 +108,7 @@ export const projectsData = [
     description:
       "Ayurvedic hospital and clinic offering holistic health treatments.",
     category: "Healthcare / Ayurveda",
-    image: images.project12,
+    image: images.swasthya,
     link: "https://swasthyaayurvedic.com/",
   },
   {
@@ -116,7 +116,7 @@ export const projectsData = [
     title: "Teachers Group",
     description: "Professional learning community and network for educators.",
     category: "Education / Community",
-    image: images.project13,
+    image: images.teachers,
     link: "https://teachersgroup.in/",
   },
   {
@@ -124,7 +124,7 @@ export const projectsData = [
     title: "Zarva Fashion",
     description: "E-commerce store for fashion, jewelry, and accessories.",
     category: "IT / Digital Marketing",
-    image: images.project14,
+    image: images.zarva,
     link: "https://zarva.in/",
   },
   {
@@ -133,7 +133,7 @@ export const projectsData = [
     description:
       "IT company providing digital marketing, SEO, and web solutions.",
     category: "Industrial / Furniture",
-    image: images.project15,
+    image: images.bassys,
     link: "https://bassystech.com/",
   },
 
@@ -142,16 +142,16 @@ export const projectsData = [
     title: "Sijin Koovallor",
     description: "Personal portfolio website.",
     category: "Portfolio",
-    image: images.project16,
-    link: "https://webstackers.net/",
+    image: images.sijin,
+    link: "",
   },
   {
     id: 17,
     title: "WebStackers",
     description: "Web development and IT services provider.",
     category: "IT / Web Development",
-    image: images.project17,
-    link: "https://bassystech.com/",
+    image: images.webstackers,
+    link: "https://webstackers.net/",
   },
   {
     id: 18,
@@ -159,7 +159,7 @@ export const projectsData = [
     description:
       "Training institute for software testing and digital marketing.",
     category: "Education / IT Training",
-    image: images.project18,
+    image: images.istp,
     link: "https://istpdigital.com/",
   },
   {
@@ -167,7 +167,7 @@ export const projectsData = [
     title: "Nuvia Boutique",
     description: "Fashion boutique or lifestyle business.",
     category: "Fashion / Retail",
-    image: images.project19,
+    image: images.nuvia,
     link: "https://nuviaboutiq.com/",
   },
   {
@@ -175,25 +175,25 @@ export const projectsData = [
     title: "Muhammed Shafi",
     description: "Personal portfolio of a Full Stack Developer.",
     category: "Portfolio",
-    image: images.project20,
+    image: images.shafi,
     link: "https://muhammedshafik.com",
   },
 
-  {
-    id: 21,
-    title: "Arafa Schools",
-    description: "Educational institution offering academic schooling.",
-    category: "Education",
-    image: images.project21,
-    link: "https://arafaschools.org/",
-  },
+  // {
+  //   id: 21,
+  //   title: "Arafa Schools",
+  //   description: "Educational institution offering academic schooling.",
+  //   category: "Education",
+  //   image: images.,
+  //   link: "https://arafaschools.org/",
+  // },
   {
     id: 22,
     title: "Huelux online",
     description:
       "Business website (likely related to lighting, design, or retail).",
     category: "Business / E-commerce",
-    image: images.project22,
+    image: images.huelux,
     link: "https://huelux.online",
   },
 ];

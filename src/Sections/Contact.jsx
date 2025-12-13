@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ToastContainer, toast } from 'react-toastify'; // 1. Import Toast
-import 'react-toastify/dist/ReactToastify.css'; // 2. Import CSS
+import emailjs from "@emailjs/browser"; // 1. Import EmailJS
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { 
   FaPaperPlane, 
   FaFacebookF, 
@@ -13,12 +14,32 @@ import {
 import { images } from "../assets/assets"; 
 import ParticlesBackground from "../Components/ParticlesBackground";
 
+const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY; 
+const phone_num = import.meta.env.VITE_PHONE;
+
+
 const Contact = () => {
+  const form = useRef(); // 2. Create a ref for the form
+
+
+    // 1. Enter your phone number (Must include Country Code, NO symbols like + or -)
+  // Example: "919876543210" for India
+  const phoneNumber = phone_num; 
+  
+  // 2. Default Message (Optional)
+  const message = "Hello, I saw your portfolio and would like to discuss a project.";
+
+  // 3. Create the WhatsApp URL
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  
+  // State for controlled inputs (to clear them later)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     service: "",
-    message: ""
+    idea: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,21 +48,23 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const myForm = e.target;
-    const formDataObj = new FormData(myForm);
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formDataObj).toString(),
-    })
-      .then(() => {
-        // 3. Show Success Toast
-        toast.success("Message Sent Successfully!", {
+    // 3. EmailJS Logic
+    // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 'YOUR_PUBLIC_KEY' with actual values
+    emailjs
+      .sendForm(
+        SERVICE_ID, 
+        TEMPLATE_ID, 
+        form.current, 
+        { publicKey: PUBLIC_KEY }
+      )
+      .then(
+        () => {
+          // Success
+          toast.success("Message Sent Successfully!", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -49,27 +72,26 @@ const Contact = () => {
             pauseOnHover: true,
             draggable: true,
             theme: "dark",
-        });
-        
-        setIsSubmitting(false);
-        setFormData({ name: "", email: "", service: "", message: "" }); 
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsSubmitting(false);
-        // 4. Show Error Toast
-        toast.error("Failed to send message. Please try again.", {
+          });
+
+          setIsSubmitting(false);
+          setFormData({ name: "", email: "", service: "", idea: "" }); // Clear form
+        },
+        (error) => {
+          // Error
+          console.error("FAILED...", error.text);
+          toast.error("Failed to send message. Please try again.", {
             theme: "dark",
-        });
-      });
+          });
+          setIsSubmitting(false);
+        }
+      );
   };
 
   return (
     <section id="contact" className="w-full min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center py-20">
       
-      {/* 5. Add the Toast Container Here */}
       <ToastContainer />
-
       <ParticlesBackground />
 
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10">
@@ -104,11 +126,11 @@ const Contact = () => {
                
                <div className="flex gap-4 mt-4 justify-center lg:justify-start">
                   {[
-                    { icon: FaLinkedinIn, href: "#" },
-                    { icon: FaGithub, href: "#" },
-                    { icon: FaInstagram, href: "#" },
-                    { icon: FaFacebookF, href: "#" },
-                    { icon: FaWhatsapp, href: "#" }
+                    { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/muhammedshafipp?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                    { icon: FaGithub, href: "https://github.com/MuhammedShafiPLY" },
+                    { icon: FaInstagram, href: "https://www.instagram.com/sh_._a_fi7?igsh=Y2l0bGIyN2YxZTh2" },
+                    { icon: FaFacebookF, href: "https://www.facebook.com/share/1Bryv12FLt/" },
+                    { icon: FaWhatsapp, href: {whatsappUrl} }
                   ].map((social, idx) => (
                     <a 
                       key={idx} 
@@ -140,20 +162,15 @@ const Contact = () => {
              </div>
 
              <form 
-                name="contact" 
-                method="POST" 
-                data-netlify="true" 
-                netlify
-                onSubmit={handleSubmit} 
-                className="space-y-5"
+               ref={form} // 4. Attach the ref here
+               onSubmit={sendEmail} 
+               className="space-y-5"
              >
-                <input type="hidden" name="form-name" value="contact" />
-
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Your Name <span className="text-red-500">*</span></label>
                   <input 
                     type="text" 
-                    name="name"
+                    name="name" // Ensure this matches {{name}} in your EmailJS template
                     required
                     placeholder="Enter your name"
                     value={formData.name}
@@ -166,7 +183,7 @@ const Contact = () => {
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Your Email <span className="text-red-500">*</span></label>
                   <input 
                     type="email" 
-                    name="email"
+                    name="email" // Ensure this matches {{email}} in your EmailJS template
                     required
                     placeholder="Enter your email"
                     value={formData.email}
@@ -178,14 +195,14 @@ const Contact = () => {
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Service Needed</label>
                   <select 
-                    name="service"
+                    name="service" // Ensure this matches {{service}} in your EmailJS template
                     value={formData.service}
                     onChange={handleChange}
                     className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-gray-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all cursor-pointer"
                   >
                     <option value="" className="bg-neutral-900">Select a service...</option>
                     <option value="Web Development" className="bg-neutral-900">Web Development</option>
-                    <option value="WordPress" className="bg-neutral-900">WordPress Customization</option>
+                    <option value="WordPress Customization" className="bg-neutral-900">WordPress Customization</option>
                     <option value="UI/UX Design" className="bg-neutral-900">UI/UX Design</option>
                     <option value="Other" className="bg-neutral-900">Other</option>
                   </select>
@@ -194,11 +211,11 @@ const Contact = () => {
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Explain Your Idea</label>
                   <textarea 
-                    name="message"
+                    name="idea" // Ensure this matches {{message}} in your EmailJS template
                     rows="4"
                     required
                     placeholder="Tell me a bit about your project..."
-                    value={formData.message}
+                    value={formData.idea}
                     onChange={handleChange}
                     className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all resize-none placeholder:text-gray-700"
                   ></textarea>
