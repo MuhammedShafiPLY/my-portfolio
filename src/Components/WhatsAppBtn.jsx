@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
 const phone_num = import.meta.env.VITE_PHONE;
 
 const WhatsAppBtn = () => {
-  // 1. Enter your phone number (Must include Country Code, NO symbols like + or -)
-  // Example: "919876543210" for India
   const phoneNumber = phone_num; 
-  
-  // 2. Default Message (Optional)
   const message = "Hello, I saw your portfolio and would like to discuss a project.";
 
   // 3. Create the WhatsApp URL
