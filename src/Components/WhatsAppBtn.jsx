@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const phone_num = import.meta.env.VITE_PHONE;
 
 const WhatsAppBtn = () => {
-  const phoneNumber = 919526299568;
+  const phoneNumber = phone_num;
   const message =
     "Hello, I saw your portfolio and would like to discuss a project.";
 
