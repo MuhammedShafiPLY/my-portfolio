@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 const phone_num = import.meta.env.VITE_PHONE;
 
 const WhatsAppBtn = () => {
-  const phoneNumber = phone_num;
+  const phoneNumber = 919526299568;
   const message =
     "Hello, I saw your portfolio and would like to discuss a project.";
 
+    // console.log("Phone Number from Env:", phoneNumber);
   // 3. Create the WhatsApp URL
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
